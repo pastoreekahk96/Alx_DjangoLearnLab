@@ -1,4 +1,4 @@
-#LibraryProject
+# LibraryProject
 
 This is the initial setup of the LibraryProject Django application.
 It includes the basic project structure created with django-admin startproject.
