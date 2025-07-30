@@ -1,0 +1,33 @@
+# Ignore Python cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Ignore Django database
+db.sqlite3
+
+# Ignore environment
+.env/
+venv/
+ENV/
+
+# Ignore local settings, secrets, and temp files
+*.env
+*.log
+*.pot
+*.pyc
+*.sqlite3
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Ignore IDE/editor configs
+.idea/
+.vscode/
+.DS_Store
+
+# Optional: Ignore migrations (optional if you like resetting often)
+**/migrations/*.py
+!**/migrations/__init__.py
+
