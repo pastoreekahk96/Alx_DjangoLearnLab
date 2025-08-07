@@ -4,7 +4,7 @@ from relationship_app.models import Author, Book, Library, Librarian
 def books_by_author(author_name):
     try:
         author = Author.objects.get(name=author_name)
-        books = author.books.all()
+        books = Book.objects.filter(author=author)
         print(f"Books by {author.name}:")
         for book in books:
             print(f"- {book.title}")
@@ -26,15 +26,9 @@ def books_in_library(library_name):
 def librarian_for_library(library_name):
     try:
         library = Library.objects.get(name=library_name)
-        librarian = library.librarian  # via related_name
+        librarian = Librarian.objects.get(library=library)
         print(f"Librarian for {library.name}: {librarian.name}")
     except Library.DoesNotExist:
         print("Library not found.")
     except Librarian.DoesNotExist:
         print("No librarian assigned.")
-
-# Example usage (run these inside Django shell or call from a script)
-if __name__ == '__main__':
-    books_by_author("Chinua Achebe")
-    books_in_library("Main Library")
-    librarian_for_library("Main Library")
