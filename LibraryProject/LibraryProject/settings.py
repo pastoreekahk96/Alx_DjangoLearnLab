@@ -4,13 +4,15 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Never commit a real deployment secret. Set DJANGO_SECRET_KEY in the environment.
-SECRET_KEY = os.environ.get(
-    "DJANGO_SECRET_KEY",
-    "django-insecure-local-development-only",
-)
-
+# Use a local-only fallback for coursework development, but require an explicit
+# secret in production so a predictable development key cannot be deployed.
+DJANGO_SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
+
+if not DEBUG and not DJANGO_SECRET_KEY:
+    raise RuntimeError("DJANGO_SECRET_KEY must be set when DJANGO_DEBUG is false.")
+
+SECRET_KEY = DJANGO_SECRET_KEY or "django-insecure-local-development-only"
 
 ALLOWED_HOSTS = [
     host.strip()
@@ -50,7 +52,7 @@ TEMPLATES = [
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
         },
