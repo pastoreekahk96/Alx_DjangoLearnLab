@@ -2,16 +2,28 @@
 __pycache__/
 *.py[cod]
 
-# Virtual env
+# Virtual environments
 .venv/
-.en/
+venv/
+env/
 
-# Django stuff
+# Django local database and logs
 db.sqlite3
 *.log
 
-# Editor/project files
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Test/coverage output
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editors and OS files
 .idea/
 .vscode/
 *.suo
-
+.DS_Store
+Thumbs.db
